@@ -17,6 +17,9 @@ class Client
      */
     private $http;
 
+    /**
+     * @var string
+     */
     private $key;
 
     /**
