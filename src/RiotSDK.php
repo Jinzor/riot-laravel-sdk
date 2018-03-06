@@ -1,4 +1,5 @@
 <?php
+
 namespace Lbrs\Riot;
 use GuzzleHttp\Client;
 
