@@ -1,6 +1,6 @@
 <?php
 namespace Lbrs\Riot;
-use GuzzleHttp\Client as Http;
+use GuzzleHttp\Client;
 
 /**
  * Riot API implementation.
@@ -13,7 +13,7 @@ class RiotSDK
     const API_BASE_URI = 'https://euw1.api.riotgames.com';
 
     /**
-     * @var Http
+     * @var Client
      */
     private $http;
 
@@ -29,7 +29,7 @@ class RiotSDK
      */
     public function __construct($apiKey)
     {
-        $this->http = new Http([
+        $this->http = new Client([
             'base_uri' => self::API_BASE_URI,
             'headers' => [
                 'Accept' => 'application/json',

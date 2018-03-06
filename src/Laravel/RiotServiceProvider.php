@@ -3,7 +3,7 @@
 namespace Lbrs\Riot\Laravel;
 
 use Illuminate\Support\ServiceProvider;
-use Lbrs\Riot\Client;
+use Lbrs\Riot\RiotSDK;
 
 /**
  * Service Provider
@@ -34,9 +34,9 @@ class RiotServiceProvider extends ServiceProvider
         $this->app->singleton('riot.config', function ($app) {
             return $this->app['config']['dummy'];
         });
-        $this->app->singleton(Client::class, function ($app) {
+        $this->app->singleton(RiotSDK::class, function ($app) {
             $config = $app['riot.config'];
-            return new Client($config['key']);
+            return new RiotSDK($config['key']);
         });
     }
     /**
@@ -47,7 +47,7 @@ class RiotServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            Client::class,
+            RiotSDK::class,
         ];
     }
 }

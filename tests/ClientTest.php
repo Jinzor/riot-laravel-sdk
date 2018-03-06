@@ -3,7 +3,7 @@
 namespace Lbrs\Riot\Test;
 
 use PHPUnit\Framework\TestCase;
-use Lbrs\Riot\Client;
+use Lbrs\Riot\RiotSDK;
 
 class ClientTest extends TestCase
 {
@@ -12,7 +12,7 @@ class ClientTest extends TestCase
     public function setUp()
     {
         $key = getenv('RIOT_KEY');
-        $this->client = new Client($key);
+        $this->client = new RiotSDK($key);
     }
 
     public function testGetUser()
