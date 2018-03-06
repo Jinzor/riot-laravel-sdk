@@ -13,7 +13,7 @@
       "email": "loc.brisset@gmail.com"
     }
   ],
-  "version": "0.0.2",
+  "version": "0.0.3",
   "require": {
     "php": ">=5.6",
     "laravel/framework": ">5.2",
@@ -25,16 +25,8 @@
     "vlucas/phpdotenv": "^2.4"
   },
   "autoload": {
-    "files": [
-      ""
-    ],
-    "psr-4": {
-      "Lbr\\Riot\\": "src"
-    }
+    "classmap": [
+      "src/"
+    ]
   },
-  "autoload-dev": {
-    "psr-4": {
-      "Lbr\\Riot\\Test\\": "tests"
-    }
-  }
 }
