@@ -25,16 +25,8 @@
     "vlucas/phpdotenv": "^2.4"
   },
   "autoload": {
-    "files": [
-      ""
-    ],
     "psr-4": {
       "Lbrs\\Riot\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Lbrs\\Riot\\Test\\": "tests/"
     }
   }
 }

@@ -1,5 +1,7 @@
 <?php
 
+namespace Lbrs\Riot\Test;
+
 use PHPUnit\Framework\TestCase;
 use Lbrs\Riot\Client;
 
