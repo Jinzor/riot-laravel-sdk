@@ -7,14 +7,28 @@ use Lbrs\Riot\RiotSDK;
 
 class RiotSdkTest extends TestCase
 {
-	public function test_sdk_init()
-	{
-        $this->client = new RiotSDK(get_env('RIOT_KEY'));
-	}
-
-	public function testGetUser()
+	/**
+     * This method is called before each test.
+     */
+    protected function setUp()
     {
-        $summoner = $this->client->getSummoner('Ryuuketsü');
-        $this->assertInternalType('object', $summoner);
+        $this->client = new RiotSDK(env('RIOT_KEY'));
+        $this->assertInternalType('object', $this->client);
+    }
+
+	public function testGetSummoner()
+    {
+        $result = $this->client->getSummoner('Ryuuketsü');
+        $this->assertEquals(200, $result->getStatusCode());
+        $this->assertInternalType('object', $result);
+        $data = json_decode($result->getBody(true), true);
+	    $this->assertArrayHasKey('name', $data);
+    }
+
+	public function testGetChampions()
+    {
+        $result = $this->client->getChampions();
+        $this->assertEquals(200, $result->getStatusCode());
+        $this->assertInternalType('object', $result);
     }
 }

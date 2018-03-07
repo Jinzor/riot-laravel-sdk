@@ -53,6 +53,16 @@ class RiotSDK
     }
 
     /**
+     * Return the Champion list
+     *
+     * @return array|object
+     */
+    public function getChampions()
+    {
+        return $this->call('GET', '/lol/platform/v3/champions');
+    }
+
+    /**
      * Send a request to the API.
      *
      * @param  string $method The HTTP method.
