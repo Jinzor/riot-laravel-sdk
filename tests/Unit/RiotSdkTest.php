@@ -25,7 +25,9 @@ class RiotSdkTest extends TestCase
 
     public function testGetChampions()
     {
-    	$result = $this->client->getChampions();
+    	$response = $this->client->getChampions();
+    	$this->assertArrayHasKey('champions', $response);
+    	$result = $response['champions'];
     	$this->assertInternalType('array', $result);
 
     	foreach($result as $k => $v) {
