@@ -32,7 +32,7 @@ class RiotServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/config.php', 'riot');
         $this->app->singleton('riot.config', function ($app) {
-            return $this->app['config']['dummy'];
+            return $this->app['config']['riot'];
         });
         $this->app->singleton(RiotSDK::class, function ($app) {
             $config = $app['riot.config'];
