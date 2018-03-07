@@ -30,14 +30,15 @@ class RiotSDK
      */
     public function __construct($apiKey)
     {
+        $this->key = $apiKey;
+
         $this->http = new Client([
             'base_uri' => self::API_BASE_URI,
             'headers' => [
                 'Accept' => 'application/json',
+                'X-Riot-Token' => $this->key,
             ]
         ]);
-
-        $this->key = $apiKey;
     }
 
     /**
