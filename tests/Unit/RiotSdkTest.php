@@ -12,23 +12,26 @@ class RiotSdkTest extends TestCase
      */
     protected function setUp()
     {
-        $this->client = new RiotSDK(env('RIOT_KEY'));
+        $this->client = new RiotSDK('RGAPI-1c69db36-eca7-46f7-b0a0-5f21f03b5d5c');
         $this->assertInternalType('object', $this->client);
     }
 
 	public function testGetSummoner()
     {
         $result = $this->client->getSummoner('Ryuuketsü');
-        $this->assertEquals(200, $result->getStatusCode());
-        $this->assertInternalType('object', $result);
-        $data = json_decode($result->getBody(true), true);
-	    $this->assertArrayHasKey('name', $data);
+        $this->assertInternalType('array', $result);
+	    $this->assertArrayHasKey('name', $result);
     }
 
-	public function testGetChampions()
+    public function testGetChampions()
     {
-        $result = $this->client->getChampions();
-        $this->assertEquals(200, $result->getStatusCode());
-        $this->assertInternalType('object', $result);
+    	$result = $this->client->getChampions();
+    	$this->assertInternalType('array', $result);
+
+    	foreach($result as $k => $v) {
+			$this->assertInternalType('array', $v);
+    		$this->assertArrayHasKey('id', $v);
+    		exit;
+    	}
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
 namespace Lbrs\Riot;
+
+use Exception;
 use GuzzleHttp\Client;
 
 /**
@@ -76,7 +78,13 @@ class RiotSDK
         if (!empty($params)) {
             $options['json'] = $params;
         }
+
         $response = $this->http->request($method, $endpoint, $options);
-        return json_decode($response->getBody());
+
+        if($response->getStatusCode() == 200) {
+            return json_decode($response->getBody(), true);
+        } else {
+            throw new Exception($response->getStatusCode() . ' error');
+        }
     }
 }
