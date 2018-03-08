@@ -2,8 +2,8 @@
 
 namespace Lbrs\Riot;
 
-use Exception;
 use GuzzleHttp\Client;
+use Lbrs\Riot\Resources;
 
 /**
  * Riot API implementation.
@@ -18,7 +18,7 @@ class RiotSDK
     /**
      * @var Client
      */
-    private $http;
+    protected $http;
 
     /**
      * @var string
@@ -47,21 +47,21 @@ class RiotSDK
      * Get a Summoner from his name.
      *
      * @param $name
-     * @return array|object
+     * @return Resources\Summoner
      */
     public function getSummoner($name)
     {
-        return $this->call('GET', '/lol/summoner/v3/summoners/by-name/' . $name);
+        return (new Resources\Summoner($this))->getFromName($name);
     }
 
     /**
-     * Return the Champion list
+     * Return the Champions list.
      *
-     * @return array|object
+     * @return \Illuminate\Support\Collection
      */
     public function getChampions()
     {
-        return $this->call('GET', '/lol/platform/v3/champions');
+        return (new Resources\Champion($this))->getList();
     }
 
     /**
@@ -70,9 +70,9 @@ class RiotSDK
      * @param  string $method The HTTP method.
      * @param  string $endpoint The endpoint.
      * @param  array $params The params to send with the request.
-     * @return array|object The response as JSON.
+     * @return mixed The response as JSON.
      */
-    private function call($method, $endpoint, array $params = null)
+    public function call($method, $endpoint, array $params = null)
     {
         $options = [];
         if (!empty($params)) {
@@ -80,11 +80,6 @@ class RiotSDK
         }
 
         $response = $this->http->request($method, $endpoint, $options);
-
-        if($response->getStatusCode() == 200) {
-            return json_decode($response->getBody(), true);
-        } else {
-            throw new Exception($response->getStatusCode() . ' error');
-        }
+        return json_decode($response->getBody(), true);
     }
 }
